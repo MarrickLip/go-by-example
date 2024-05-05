@@ -17,10 +17,11 @@ func f(n int) (int, error) {
 
 func main() {
 	for i := range 10 {
-		if res, err := f(i); err != nil {
+		res, err := f(i)
+		if err != nil {
 			fmt.Println("f failed:", err)
-		} else {
-			fmt.Println("f worked:", res)
 		}
+
+		fmt.Println("f worked:", res)
 	}
 }
