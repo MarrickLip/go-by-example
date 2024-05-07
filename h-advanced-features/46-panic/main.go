@@ -1,10 +1,15 @@
 package main
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	_, err := os.Create("46-panic/test.txt")
+	f, err := os.Create("46-panic/test.txt")
 	if err != nil {
-		panic(err)
+		fmt.Println("Error creating file:", err)
+		return
 	}
+	fmt.Printf("f: %v\n", f)
 }

@@ -5,13 +5,14 @@ import (
 	"os"
 )
 
-func createFile(p string) *os.File {
+func createFile(p string) (*os.File, error) {
 	fmt.Println("createFile")
 	f, err := os.Create(p)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return f
+
+	return f, nil
 }
 
 func writeFile(f *os.File) {
@@ -25,8 +26,12 @@ func closeFile(f *os.File) {
 }
 
 func main() {
-	f := createFile("47-defer/test.txt")
+	f, err := createFile("47-defer/test.txt")
 	defer closeFile(f)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 
 	writeFile(f)
 }
